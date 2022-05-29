@@ -1,0 +1,121 @@
+ library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use STD.textio.all;
+use ieee.std_logic_textio.all;
+ 
+ 
+ entity PROJ_ENIGMA is
+ 
+ port(entrada : in bit_vector (4 downto 0) ; 
+ posRot1: in integer;
+ posRot2: in integer;
+ posRot3: in integer;
+ caboA: in integer;
+ caboB: in integer;
+ caboC: in integer;
+-- caboD: in string;
+-- caboE: in string;
+-- caboF: in string;
+-- caboG: in string;
+-- caboH: in string;
+-- caboI: in string;
+-- caboJ: in string;
+-- caboK: in string;
+-- caboL: in string;
+-- caboM: in string;
+ qa,qb,qc: out bit);
+ 
+ end entity proj_ENIGMA;
+ architecture keyboad of proJ_ENIGMA is
+ 
+ shared variable aux: string (1 to 1);
+ 
+
+ file file_VECTORS : text;
+ file file_RESULTS : text;
+ 
+ function lermsg(msg1: in string) return boolean is
+ 
+ begin
+ 
+ file_open(file_VECTORS, "input_vectors.txt",  read_mode);
+ file_open(file_RESULTS, "output_results.txt", write_mode);
+ return true;
+ 
+ end;
+ 
+ function convBit2Str (letra1 : in bit_vector(4 downto 0)) return string is
+ variable lt : string (1 to 1);
+ begin
+  case letra1 is
+  
+	when "00000"=>
+	lt:="B";
+	when "00001"=>
+	lt:="A";
+	when "00010"=>
+	lt:="C";
+	when others =>
+	lt:="0";
+	end case;
+ 
+	return lt;
+ 
+ end;
+ 
+
+ 
+ begin
+ process(caboA,caboB,caboC,entrada)
+ begin
+ aux:=convBit2Str(entrada);
+ case aux is
+ 
+ when "A" =>
+		case caboA is
+		 
+		 when 1 =>
+		 qa<='1';
+		  when 2 =>
+		 qb<='1';
+		  when 3 =>
+		 qc<='1';
+		 when others =>
+		 end case;
+ 
+ when "B" =>
+		 case cabob is
+		 
+		 when 1 =>
+		 qa<='1';
+		  when 2 =>
+		 qb<='1';
+		  when 3 =>
+		 qc<='1';
+		 when others =>
+		 end case;
+ 
+  when "C" =>
+		 case cabob is
+		 
+		 when 1 =>
+		 qa<='1';
+		  when 2 =>
+		 qb<='1';
+		  when 3 =>
+		 qc<='1';
+		 when others =>
+		 end case;
+	when others =>
+	
+	end case;
+	
+	
+ end process;
+ 
+
+ 
+ end architecture keyboad;
+ 
+ 
